@@ -16,8 +16,8 @@ class ViewController: UITableViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        //title = "Strom Viewer"
-        //navigationController?.navigationBar.prefersLargeTitles = true
+        title = "Storm Viewer"
+        navigationController?.navigationBar.prefersLargeTitles = true
         
         // FileManager is a built in system type that works with files
         let fm = FileManager.default
@@ -44,6 +44,10 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        // This sorts the pictures array into ascending order
+        pictures.sort()
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "Picture", for: indexPath)
         cell.textLabel?.text = pictures[indexPath.row]
         return cell
@@ -52,6 +56,8 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "Detail") as? DetailViewController {
             vc.selectedImage = pictures[indexPath.row]
+            vc.pictures = pictures
+            vc.imagePosition = indexPath.row + 1
             navigationController?.pushViewController(vc, animated: true)
         }
     }
