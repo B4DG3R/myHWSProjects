@@ -38,6 +38,32 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
         
         askQuestion(action: nil)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
+    }
+    
+    @objc func shareTapped() {
+        
+//        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else
+//            {
+//            print("No image found")
+//            return
+//        }
+        
+//        let vc = UIActivityViewController(activityItems: [image, selectedImage!], applicationActivities: [])
+//
+//        // App will crash on ipad without this line of code
+//        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+//
+//        present(vc, animated: true)
+        
+        let ac = UIAlertController(title: "Your Score: \(score) points scored", message: "Question \(questionsAsked) out of 10 questions.", preferredStyle: .alert)
+        
+        // This puts a button on the alert
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: nil))
+        
+        // This presents the alert
+        present(ac, animated: true)
     }
     
     func askQuestion(action: UIAlertAction!) {

@@ -36,8 +36,6 @@ class ViewController: UITableViewController {
         
         print(pictures)
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(shareTapped))
-        
         
     }
     
@@ -62,16 +60,6 @@ class ViewController: UITableViewController {
             vc.imagePosition = indexPath.row + 1
             navigationController?.pushViewController(vc, animated: true)
         }
-    }
-    
-    @objc func shareTapped() {
-        
-        let vc = UIActivityViewController(activityItems: ["Share this App"], applicationActivities: [])
-        
-        // App will crash on ipad without this line of code
-        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
-        
-        present(vc, animated: true)
     }
 
 }
