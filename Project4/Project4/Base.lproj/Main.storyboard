@@ -18,7 +18,30 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <navigationItem key="navigationItem" id="kdp-DU-ci5"/>
+                    <navigationItem key="navigationItem" id="kdp-DU-ci5">
+                        <leftBarButtonItems>
+                            <barButtonItem style="plain" id="A4z-oh-MsF">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ayw-LX-JvV">
+                                    <rect key="frame" x="20" y="11" width="22" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="arrowshape.turn.up.backward.fill" catalog="system"/>
+                                    <connections>
+                                        <action selector="goBackButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9eS-9k-qcW"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                            <barButtonItem style="plain" id="93O-35-svt">
+                                <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sdn-o0-AMp">
+                                    <rect key="frame" x="50" y="13.5" width="21" height="17.5"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <state key="normal" image="arrowshape.turn.up.forward.fill" catalog="system" backgroundImage="arrowshape.turn.up.forward.fill"/>
+                                    <connections>
+                                        <action selector="goForwardButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dbs-EQ-qZr"/>
+                                    </connections>
+                                </button>
+                            </barButtonItem>
+                        </leftBarButtonItems>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -44,6 +67,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrowshape.turn.up.backward.fill" catalog="system" width="128" height="104"/>
+        <image name="arrowshape.turn.up.forward.fill" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

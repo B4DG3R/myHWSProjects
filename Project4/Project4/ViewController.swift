@@ -12,7 +12,7 @@ class ViewController: UIViewController, WKNavigationDelegate {
     
     var webView: WKWebView!
     var progressView: UIProgressView!
-    var websites = ["apple.com", "hackingwithswift.com"]
+    var websites = ["hackingwithswift.com", "apple.com"]
     
     override func loadView() {
         
@@ -41,6 +41,10 @@ class ViewController: UIViewController, WKNavigationDelegate {
         // uses the customView initialiser to wrap and make the barButton
         let progressButton = UIBarButtonItem(customView: progressView)
         
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(webView.goBack))
+//        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Forward", style: .plain, target: self, action: #selector(webView.goForward))
+        
         toolbarItems = [progressButton, spacer, refresh]
         navigationController?.isToolbarHidden = false
         
@@ -55,6 +59,17 @@ class ViewController: UIViewController, WKNavigationDelegate {
         
         webView.allowsBackForwardNavigationGestures = true
         
+    }
+    
+    
+    @IBAction func goBackButtonTapped(_ sender: UIButton) {
+        
+        webView.goBack()
+    }
+    
+    @IBAction func goForwardButtonTapped(_ sender: UIButton) {
+        
+        webView.goForward()
     }
     
     @objc func openTapped() {
@@ -102,9 +117,21 @@ class ViewController: UIViewController, WKNavigationDelegate {
                     return
                 }
             }
+        } else {
+            
+            decisionHandler(.cancel)
+            
+            let ac = UIAlertController(title: "Site Blocked", message: "This website is not allowed", preferredStyle: .alert)
+            
+            // This puts a button on the alert
+            ac.addAction(UIAlertAction(title: "Cencel", style: .cancel))
+            
+            // This presents the alert
+            present(ac, animated: true)
+            
         }
         
-        decisionHandler(.cancel)
+        
     }
 
 }
