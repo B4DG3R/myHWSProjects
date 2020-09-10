@@ -10,10 +10,16 @@ import UIKit
 class ViewController: UITableViewController {
     
     var petitions = [Petition]()
+    var filterWord: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Credits", style: .plain, target: self, action: #selector(credits))
+        
+        navigationItem.leftBarButtonItem = (UIBarButtonItem(title: "Filter", style: .plain, target: self, action: #selector(filter)))
         
         let urlString: String
             
@@ -34,6 +40,51 @@ class ViewController: UITableViewController {
             showError()
             
         }
+    }
+    
+    @objc func credits() {
+        let ac = UIAlertController(title: "Credits", message: "All of the information in this App comes from the White House API.", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
+    }
+    
+    @objc func filter() {
+        let ac = UIAlertController(title: "Enter Filter Word", message: nil, preferredStyle: .alert)
+        ac.addTextField()
+        
+        let filterAction = UIAlertAction(title: "Search", style: .default) {
+            [weak self, weak ac] action in
+            guard let filterWord = ac?.textFields?[0].text?.lowercased() else { return }
+            self?.filterAnswer(filterWord)
+            }
+        ac.addAction(filterAction)
+        tableView.reloadData()
+        present(ac, animated: true)
+    }
+    
+    func filterAnswer(_ answer: String) {
+        filterWord = answer
+        
+        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+            
+            let petition = petitions[indexPath.row]
+    //        cell.textLabel?.text = petition.title
+    //        cell.detailTextLabel?.text = petition.body
+            
+            for title in petition.title {
+                if
+            }
+            
+            if petition.title.contains(filterWord!) {
+                cell.textLabel?.text = petition.title
+                cell.detailTextLabel?.text = petition.body
+            }
+            
+            return cell
+        }
+
     }
     
     func showError() {
@@ -61,6 +112,7 @@ class ViewController: UITableViewController {
         let petition = petitions[indexPath.row]
         cell.textLabel?.text = petition.title
         cell.detailTextLabel?.text = petition.body
+        
         return cell
     }
     
